@@ -10,10 +10,11 @@
       </div>
       <div style="text-align: center; line-height: 50px; height: 50px; background-color: orange;
         border: 2px solid black;">
-        <div style="display: inline; padding: 10px;" onclick="alert('home')">Home</div>
-        <div style="display: inline; padding: 10px;" onclick="alert('about')">About</div>
-        <div style="display: inline; padding: 10px;" onclick="alert('view')">View</div>
-        <div style="display: inline; padding: 10px;" onclick="alert('help')">Help</div>
+        <span class="headerLink" onclick="window.location.href = 'index.html'">Home</span>
+        <span class="headerLink" onclick="alert('about')">About</span>
+        <span class="headerLink" onclick="window.location.href = 'view.html'">View</span>
+        <span class="headerLink" onclick="alert('help')">Help</span>
+        <span class="headerLink" onclick="window.location.href = 'login.php'">Login</span>
       </div>
     </div>
 	<h2 style="text-align:center">Welcome to P.A.B.L.O. Please Login</h2>
