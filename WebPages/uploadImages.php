@@ -1,6 +1,6 @@
 <?php
 function uploadImage($fileName) {
-  $target_dir = "uploads/";
+  $target_dir = "../uploads/";
   $target_file = $target_dir . basename($_FILES[$fileName]["name"]);
   $uploadOk = 1;
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -39,11 +39,12 @@ function uploadImage($fileName) {
       if (move_uploaded_file($_FILES[$fileName]["tmp_name"], $target_file)) {
           echo "The file ". basename( $_FILES[$fileName]["name"]). " has been uploaded.";
       } else {
-          echo "Sorry, there was an error uploading your file.";
+          echo "Sorry, there was an error uploading your file. Error #".$_FILES[$fileName]["error"];
       }
   }
 }
 
 uploadImage("OriginalUpload");
+echo "<br><br>";
 uploadImage("StyleUpload");
 ?>
