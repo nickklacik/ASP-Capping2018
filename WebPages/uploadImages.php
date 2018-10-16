@@ -1,6 +1,13 @@
 <?php
-function uploadImage($fileName) {
-  $target_dir = "../uploads/";
+function contentImage($fileName){
+  $target_dir = "../uploads/content";
+  uploadImage($fileName,$target_dir);
+}
+function styleImage($fileName){
+  $target_dir = "../uploads/style";
+  uploadImage($fileName,$target_dir);
+}
+function uploadImage($fileName,$target_dir) {
   $target_file = $target_dir . basename($_FILES[$fileName]["name"]);
   $uploadOk = 1;
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -44,7 +51,7 @@ function uploadImage($fileName) {
   }
 }
 
-uploadImage("OriginalUpload");
+contentImage("OriginalUpload");
 echo "<br><br>";
-uploadImage("StyleUpload");
+styleImage("StyleUpload");
 ?>
