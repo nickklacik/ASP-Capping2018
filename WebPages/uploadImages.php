@@ -1,11 +1,11 @@
 <?php
 function contentImage($fileName){
-  $target_dir = "../uploads/content";
-  uploadImage($fileName,$target_dir);
+  $target_dir = "../uploads/content/";
+  return uploadImage($fileName,$target_dir);
 }
 function styleImage($fileName){
-  $target_dir = "../uploads/style";
-  uploadImage($fileName,$target_dir);
+  $target_dir = "../uploads/style/";
+  return uploadImage($fileName,$target_dir);
 }
 function uploadImage($fileName,$target_dir) {
   $target_file = $target_dir . basename($_FILES[$fileName]["name"]);
@@ -28,7 +28,7 @@ function uploadImage($fileName,$target_dir) {
       $uploadOk = 0;
   }
   // Check file size
-  if ($_FILES[$fileName]["size"] > 500000) {
+  if ($_FILES[$fileName]["size"] > 800000) {
       echo "Sorry, your file is too large.";
       $uploadOk = 0;
   }
@@ -41,17 +41,35 @@ function uploadImage($fileName,$target_dir) {
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
       echo "Sorry, your file was not uploaded.";
+      return false;
   // if everything is ok, try to upload file
   } else {
       if (move_uploaded_file($_FILES[$fileName]["tmp_name"], $target_file)) {
           echo "The file ". basename( $_FILES[$fileName]["name"]). " has been uploaded.";
+          return $target_file;
       } else {
           echo "Sorry, there was an error uploading your file. Error #".$_FILES[$fileName]["error"];
+          return false;
       }
   }
 }
 
-contentImage("OriginalUpload");
+$content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
-styleImage("StyleUpload");
+$style = "/var/www" . ltrim(styleImage("StyleUpload"),"..");
+echo "<br>";
+echo $content;
+echo "<br>";
+echo $style;
+echo "<br>";
+if(($content!=false)&&($style!=false)){
+  $old_path = getcwd();
+  chdir('/home/npadrazo/adain/AdaIN-style/');
+  $inputStr = 'th test.lua -gpu -1 -content ' . $content . ' -style '. $style . ' -gpu -1 -outputDir /var/www/output';
+  $output = exec($inputStr);
+  chdir($old_path);
+  echo $inputStr;
+  echo "<br>";
+  echo $output;
+}
 ?>
