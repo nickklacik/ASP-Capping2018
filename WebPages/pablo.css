@@ -1,0 +1,26 @@
+.spacer {
+  width: 5%;
+  float: left;
+  text-align: center;
+}
+
+.headerLink {
+  padding: 10px;
+}
+
+.headerLink:hover {
+  background-color: DarkOrange;
+}
+
+.button {
+  text-align: center; 
+  background-color: orange; 
+  border: 2px solid black; 
+  font-size: 24px; 
+  width: 200px; 
+  padding: 10px
+}
+
+.button:hover {
+  background-color: DarkOrange; 
+}

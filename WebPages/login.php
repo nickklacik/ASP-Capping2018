@@ -29,21 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <html>
   <head>
     <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
   <body>
-    <div style="height: 150px; width: 100%;">
-      <div style="text-align: center; height: 100px; background-color: white;">
-        <img src="Knd.jpg" width="182px" height="100px">
-      </div>
-      <div style="text-align: center; line-height: 50px; height: 50px; background-color: orange;
-        border: 2px solid black;">
-        <span class="headerLink" onclick="window.location.href = 'index.php'">Home</span>
-        <span class="headerLink" onclick="alert('about')">About</span>
-        <span class="headerLink" onclick="window.location.href = 'view.php'">View</span>
-        <span class="headerLink" onclick="alert('help')">Help</span>
-        <span class="headerLink" onclick="window.location.href = 'register.php'">Register</span>
-      </div>
-    </div>
+    <?php
+      require("functions.php");
+      createHeader();
+    ?>
 	<h2 style="text-align:center">Welcome to P.A.B.L.O. Please Login</h2>
 	<div id="login" style="text-align:center">
 		<form action="login.php" method="POST">
