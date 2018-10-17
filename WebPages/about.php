@@ -4,49 +4,13 @@
     <meta charset="UTF-8"/>
     <title>Pastyle</title>
     <script src="index.js" type="text/javascript"></script>
-    <style>
-      .spacer {
-        width: 5%;
-        float: left;
-        text-align: center;
-      }
-      
-      .headerLink {
-        padding: 10px;
-      }
-      
-      .headerLink:hover {
-        background-color: DarkOrange;
-      }
-      
-      .button {
-        text-align: center; 
-        background-color: orange; 
-        border: 2px solid black; 
-        font-size: 24px; 
-        width: 200px; 
-        padding: 10px
-      }
-      
-      .button:hover {
-        background-color: DarkOrange; 
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
   <body>
-    <div style="height: 150px; width: 100%;">
-      <div style="text-align: center; height: 100px; background-color: white;">
-        <img src="pastyle.png" width="182px" height="100px">
-      </div>
-      <div style="text-align: center; line-height: 50px; height: 50px; background-color: orange;
-        border: 2px solid black;">
-        <span class="headerLink" onclick="window.location.href = 'index.html'">Home</span>
-        <span class="headerLink" onclick="alert('about')">About</span>
-        <span class="headerLink" onclick="window.location.href = 'view.html'">View</span>
-        <span class="headerLink" onclick="alert('help')">Help</span>
-        <span class="headerLink" onclick="window.location.href = 'login.php'">Login</span>
-      </div>
-    </div>
+    <?php
+      require("functions.php");
+      createHeader();
+    ?>
     <br>
 	<h1 align=center> About Pastyle </h1>
 	<p style="padding-left:10px;padding-right:10px;"> Pastyle is an application created by a team of students from the Marist College Class of 2019. This application serves as their senior capping project for the great Pablo Rivas. The students came up with the name Pastyle by comining the words "pastel" and "style". Pastyle is a service that will allow users to upload their own content and styles and then stylize their content using machine learning. The API used is an Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization. </p>
