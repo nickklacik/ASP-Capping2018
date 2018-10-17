@@ -57,19 +57,13 @@ function uploadImage($fileName,$target_dir) {
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
 $style = "/var/www" . ltrim(styleImage("StyleUpload"),"..");
-echo "<br>";
-echo $content;
-echo "<br>";
-echo $style;
-echo "<br>";
-if(($content!=false)&&($style!=false)){
+if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
   chdir('/home/npadrazo/adain/AdaIN-style/');
-  $inputStr = 'th test.lua -gpu -1 -content ' . $content . ' -style '. $style . ' -gpu -1 -outputDir /var/www/output';
+  $inputStr = 'th test.lua -gpu -1 -content ' . $content . ' -style '. $style . ' -gpu -1 -outputDir /var/www/html/output  2>&1';
   $output = exec($inputStr);
   chdir($old_path);
-  echo $inputStr;
   echo "<br>";
-  echo $output;
+  echo "<img src = \"" . ltrim($output,"Output image saved at: /var/www/html") . "\">";
 }
 ?>
