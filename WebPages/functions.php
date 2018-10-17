@@ -9,8 +9,8 @@ function createHeader() {
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'index.php'\">Home</span>"
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'about.html\">About</span>"
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'view.php'\">View</span>"
-    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'upload.html\">Upload</span>"
-    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'login.php'\">Login</span>"
+    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'upload.php'\">Upload</span>"
+    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'logout.php'\">Logout</span>"
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'register.php'\">Register</span>"
     .  "</div>";
 }

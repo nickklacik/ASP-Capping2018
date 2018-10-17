@@ -51,7 +51,7 @@ require('session.php');
     </p>
     <br><br><br>
     <div style="text-align: center;">
-      <span class="button" onclick="window.location.href = 'login.php'">
+      <span class="button" onclick="window.location.href = 'upload.php'">
         Try it out!
       </span>
     </div>
