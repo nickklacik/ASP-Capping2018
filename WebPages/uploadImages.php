@@ -1,3 +1,19 @@
+<html>
+<div id="cp-store-root" data-cp-settings='{ "access_key": "2018f14870776764ef3f8d5a35ba24f1" }'></div>
+<script>
+    (function ( d, s, id ) {
+        var js, cpJs = d.getElementsByTagName( s )[0], t = new Date();
+        if ( d.getElementById( id ) ) return;
+        js = d.createElement( s );
+        js.id = id;
+        js.setAttribute( 'data-cp-url', 'https://store.canvaspop.com' );
+        js.src = 'https://store.canvaspop.com/static/js/cpopstore.js?bust=' + t.getTime();
+        cpJs.parentNode.insertBefore( js, cpJs );
+    }( document, 'script', 'canvaspop-jssdk' ));
+</script>
+</html>
+
+
 <?php
 function contentImage($fileName){
   $target_dir = "../uploads/content/";
@@ -64,6 +80,9 @@ if(($content!="/var/www")&&($style!="/var/www")){
   $output = exec($inputStr);
   chdir($old_path);
   echo "<br>";
-  echo "<img src = \"" . ltrim($output,"Output image saved at: /var/www/html") . "\">";
+  $path = ltrim($output,"Output image saved at: /var/www/html");
+  echo "<img src = \"" . $path . "\">";
+  echo "<br>";
+  echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
 }
 ?>
