@@ -4,34 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Pastyle</title>
     <script src="index.js" type="text/javascript"></script>
-    <style>
-      .spacer {
-        width: 5%;
-        float: left;
-        text-align: center;
-      }
-      
-      .headerLink {
-        padding: 10px;
-      }
-      
-      .headerLink:hover {
-        background-color: DarkOrange;
-      }
-      
-      #try {
-        text-align: center; 
-        background-color: orange; 
-        border: 2px solid black; 
-        font-size: 24px; 
-        width: 200px; 
-        padding: 10px
-      }
-      
-      #try:hover {
-        background-color: DarkOrange; 
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
   <body>
     <div style="height: 150px; width: 100%;">
