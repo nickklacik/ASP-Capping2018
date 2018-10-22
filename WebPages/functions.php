@@ -1,17 +1,25 @@
 <?php
+require('session.php');
 function createHeader() {
   echo "<div style=\"height: 150px; width: 100%;\">"
     .  "<div style=\"text-align: center; height: 100px; background-color: white;\">"
     .    "<img src=\"pastyle.png\" style=\"height: 100%\">"
-    .  "</div>"
-    .  "<div style=\"text-align: center; line-height: 50px; height: 50px; background-color: orange;"
+    .  "</div>";
+ if(isset($_SESSION['login_user'])) {
+    echo "<b><span style='text-align:left; font-size: 18px'>Welcome, " . $_SESSION['login_user'] . "</span></b>";
+  }
+    echo  "<div style=\"text-align: center; line-height: 50px; height: 50px; background-color: orange;"
     .    "border: 2px solid black;\">"
-    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'index.php'\">Home</span>"
+ /* if(isset($_SESSION['login_user'])) {
+    echo "<b><span style='text-align:left'>Welcome, " . $_SESSION['login_user'] . "</span></b>";
+    }*/
+    .  "<span class=\"headerLink\" onclick=\"window.location.href = 'index.php'\">Home</span>"
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'about.php'\">About</span>"
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'view.php'\">View</span>"
-    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'upload.php'\">Upload</span>"
-    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'logout.php'\">Logout</span>"
-    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'register.php'\">Register</span>"
-    .  "</div>";
+    .    "<span class=\"headerLink\" onclick=\"window.location.href = 'upload.php'\">Upload</span>";
+  if(isset($_SESSION['login_user'])) {
+    echo  "<span class=\"headerLink\" onclick=\"window.location.href = 'logout.php'\">Logout</span>";
+  } 
+  echo "</div>";
 }
 ?>
