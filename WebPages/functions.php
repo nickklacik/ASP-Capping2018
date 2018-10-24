@@ -6,9 +6,9 @@ function createHeader() {
     .    "<img src=\"pastyle.png\" style=\"height: 100%\">"
     .  "</div>";
  if(isset($_SESSION['login_user'])) {
-    echo "<b><span style='text-align:left; font-size: 18px'>Welcome, " . $_SESSION['login_user'] . "</span></b>";
+    echo "<b><span style='id=h1'>Welcome, " . $_SESSION['login_user'] . "</span></b>";
   }
-    echo  "<div style=\"text-align: center; line-height: 50px; height: 50px; background-color: orange;"
+    echo  "<div style=\"text-align: center; line-height: 50px; height: 50px; background-color: black;"
     .    "border: 2px solid black;\">"
  /* if(isset($_SESSION['login_user'])) {
     echo "<b><span style='text-align:left'>Welcome, " . $_SESSION['login_user'] . "</span></b>";

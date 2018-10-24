@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
-  <body>
+  <body id="bkg1" >
     <?php
       require("functions.php");
       createHeader();
     ?>
-	<h2 style="text-align:center">Welcome to P.A.B.L.O. Please Login</h2>
-	<div id="login" style="text-align:center">
+	<div id="login" >
+		<h1 id=h1> Please Login: </h1>
 		<form action="login.php" method="POST">
 		<input type="email" name="email" placeholder="Email" required><br><br>
 		<input type="password" name="pass" placeholder="Password" required><br><br>

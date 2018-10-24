@@ -1,3 +1,36 @@
+.p{
+  font-family: Tahoma;
+  size: 13px;
+}
+
+#bkg1 {
+  background-image: url("sky.jpg");
+  width: 100%;
+  background-size: cover;
+}
+
+#bkg2 {
+  background-image: url("gray.jpg");
+  width: 100%;
+  background-size: cover;
+}
+
+#h1 {
+  font-family: Tahoma;
+  font-size: 25pt;
+  text-align: center;
+}
+
+#login {
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  background-color: LightGray;
+  width: 30%;
+  border: 2px solid black;
+  padding: 10px;
+}
+
 .spacer {
   width: 5%;
   float: left;
@@ -5,24 +38,29 @@
 }
 
 .headerLink {
-  padding: 10px;
+  padding: 9px 20px;
+  background-color: white;
+  color: black;
+  font-family: Tahoma;
+  border: 3px solid black;
 }
 
 .headerLink:hover {
-  background-color: DarkOrange;
+  background-color: Gainsboro;
 }
 
 .button {
   text-align: center; 
-  background-color: orange; 
+  background-color: white; 
   border: 2px solid black; 
   font-size: 24px; 
   width: 200px; 
-  padding: 10px
+  padding: 10px;
+  font-family: Tahoma;
 }
 
 .button:hover {
-  background-color: DarkOrange; 
+  background-color: Gainsboro; 
 }
 
 .imgContainer {

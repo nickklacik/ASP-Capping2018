@@ -12,21 +12,21 @@ require('session.php');
     <script src="index.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
-  <body>
+  <body id=bkg2>
     <?php
       require("functions.php");
       createHeader();
     ?>
     <p>
-      <div style="width: 30%; float: left; text-align: center;">
+      <div style="font-family: Tahoma; font-size:15px; width: 30%; float: left; text-align: center;">
         Upload a photo
       </div>
-      <div style="width: 5%; float: left;"> &nbsp </div>
-      <div style="width: 30%; float: left; text-align: center;">
+      <div style="font-family: Tahoma; font-size: 15px; width: 5%; float: left;"> &nbsp </div>
+      <div style="font-family: Tahoma; font-size: 15px; width: 30%; float: left; text-align: center;">
         Upload a style
       </div>
       <div style="width: 5%; float: left;"> &nbsp </div>
-      <div style="width: 30%; float: left; text-align: center;">
+      <div style="font-family: Tahoma; font-size: 15px; width: 30%; float: left; text-align: center;">
         Create a Styled Image
       </div>
     </p>

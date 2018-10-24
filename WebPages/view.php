@@ -12,7 +12,7 @@ require('session.php');
     <script src="view.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
-  <body>
+  <body id="bkg2">
     <?php
       require("functions.php");
       createHeader();
