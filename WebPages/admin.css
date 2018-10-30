@@ -1,0 +1,20 @@
+table {
+    border: 1px solid black;
+    table-layout: fixed;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+th, td {
+   border: 1px solid black;
+   text-align: center;
+   width: 30px;
+   height: 30px; 
+}
+.logDiv {
+    border:1px solid black;
+    background-color:white;
+}
+.dateDiv {
+    background-color:#C0C0C0;
+}
