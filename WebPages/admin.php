@@ -27,10 +27,11 @@ if(empty($_SESSION['login_user'])) {
     <div class="dateDiv"><h2 style="padding-left:10px"><?php echo date("l, m/d/y")?></h2></div>
     <p style="padding-left:10px;">Images Uploaded:
     <?php
+    $today = date("m/d/y");
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='2018-10-28'");
-    $uploads = pg_num_rows($result);
-    echo $uploads;
+    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='".$today."'");
+    $uploads = pg_fetch_assoc($result);
+    echo $uploads['count'];
     ?>
     <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
     <table>
@@ -98,13 +99,13 @@ if(empty($_SESSION['login_user'])) {
   <br>
   </div>
   <div class="logDiv">
-  <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-1 days'))?> </div>
-  <p style="padding-left:10px;">Images Uploaded:
+    <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-1 days'))?> </div>
+    <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='2018-10-28'");
-    $uploads = pg_num_rows($result);
-    echo $uploads;
+    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -1");
+    $uploads = pg_fetch_assoc($result);
+    echo $uploads['count'];
     ?>
     <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
     <table>
@@ -172,13 +173,13 @@ if(empty($_SESSION['login_user'])) {
   <br>
 	</div>
   <div class="logDiv">
-  <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-2 days'))?> </div>
-  <p style="padding-left:10px;">Images Uploaded:
+    <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-2 days'))?> </div>
+    <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='2018-10-28'");
-    $uploads = pg_num_rows($result);
-    echo $uploads;
+    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -2");
+    $uploads = pg_fetch_assoc($result);
+    echo $uploads['count'];
     ?>
     <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
     <table>
@@ -246,13 +247,13 @@ if(empty($_SESSION['login_user'])) {
   <br>
   </div>
   <div class="logDiv">
-  <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-3 days'))?> </div>
-  <p style="padding-left:10px;">Images Uploaded:
+    <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-3 days'))?> </div>
+    <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='2018-10-28'");
-    $uploads = pg_num_rows($result);
-    echo $uploads;
+    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -3");
+    $uploads = pg_fetch_assoc($result);
+    echo $uploads['count'];
     ?>
     <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
     <table>
@@ -320,13 +321,13 @@ if(empty($_SESSION['login_user'])) {
   <br>
   </div>
   <div class="logDiv">
-  <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-4 days'))?> </div>
-  <p style="padding-left:10px;">Images Uploaded:
+    <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-4 days'))?> </div>
+    <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='2018-10-28'");
-    $uploads = pg_num_rows($result);
-    echo $uploads;
+    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -4");
+    $uploads = pg_fetch_assoc($result);
+    echo $uploads['count'];
     ?>
     <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
     <table>
@@ -394,13 +395,13 @@ if(empty($_SESSION['login_user'])) {
   <br>
   </div>
   <div class="logDiv">
-  <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-5 days'))?> </div>
-  <p style="padding-left:10px;">Images Uploaded:
+    <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-5 days'))?> </div>
+    <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='2018-10-28'");
-    $uploads = pg_num_rows($result);
-    echo $uploads;
+    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -5");
+    $uploads = pg_fetch_assoc($result);
+    echo $uploads['count'];
     ?>
     <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
     <table>
@@ -468,13 +469,13 @@ if(empty($_SESSION['login_user'])) {
   <br>
   </div>
   <div class="logDiv">
-  <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-6 days'))?> </div>
-  <p style="padding-left:10px;">Images Uploaded:
+    <div class = "dateDiv"><h2 style="padding-left:10px;"><?php echo date("l, m/d/y", strtotime( '-6 days'))?> </div>
+    <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date='2018-10-28'");
-    $uploads = pg_num_rows($result);
-    echo $uploads;
+    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -6");
+    $uploads = pg_fetch_assoc($result);
+    echo $uploads['count'];
     ?>
     <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
     <table>
