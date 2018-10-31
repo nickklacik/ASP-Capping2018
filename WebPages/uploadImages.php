@@ -15,9 +15,64 @@
 
 
 <?php
+require('session.php');
+  if(empty($_SESSION['login_user'])) {
+    header('Location: login.php');
+  }
+
+function getNewPhotoID() {
+  global $conn;
+  $sql = "SELECT MAX(Photo_ID) FROM Photos;";
+  $result = pg_query($conn, $sql);
+  $row = pg_fetch_row($result);
+  return intval($row[0]) + 1;
+}
+
+function insertPhotoIntoDB($target_file, $fileName) {
+  global $conn;
+  echo "<br>inserting into database<br>";
+  if($target_file) {
+    //$id = getNewPhotoID();
+    
+    $sql = "INSERT INTO Photos (file_name, file_path, email, upload_date, file_size, style_id) " 
+    . "VALUES ('".basename($_FILES[$fileName]["name"])."', '$target_file', '".$_SESSION['login_user']
+    ."', current_timestamp, ".$_FILES[$fileName]["size"].", 4);"; //style_id needs to be revisteed
+    echo $sql ."<br>";
+    $result = pg_query($conn, $sql);
+    /*
+    $insert['file_name'] = basename($_FILES[$fileName]["name"]);
+    $insert['file_path'] = $target_file;
+    $insert['email'] = $_SESSION['login_user'];
+    $insert['upload_date'] = microtime();
+    $insert['file_size'] = $_FILES[$fileName]["size"];
+    $insert['style_id'] = 4; //test value
+    $result = pg_insert($conn, "Photos", $insert, PGSQL_DML_STRING);
+    */
+    $status = pg_connection_status($conn);
+    var_dump($result);
+    
+    if ($status === PGSQL_CONNECTION_OK) {
+      echo 'Connection status ok';
+    } else {
+      echo 'Connection status bad';
+    }
+    
+    if($result) {
+      echo "successfully insert into database";
+    } else {
+      echo "failed to insert into database<br>";
+      echo pg_last_error($conn);
+    }
+  } else {
+    echo "Image not added to database";
+  }
+}
+
 function contentImage($fileName){
   $target_dir = "../uploads/content/";
-  return uploadImage($fileName,$target_dir);
+  $target_file =  uploadImage($fileName,$target_dir);
+  insertPhotoIntoDB($target_file, $fileName);
+  return $target_file;
 }
 function styleImage($fileName){
   $target_dir = "../uploads/style/";
@@ -72,6 +127,7 @@ function uploadImage($fileName,$target_dir) {
 
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
+/*
 $style = "/var/www" . ltrim(styleImage("StyleUpload"),"..");
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
@@ -85,4 +141,5 @@ if(($content!="/var/www")&&($style!="/var/www")){
   echo "<br>";
   echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
 }
+*/
 ?>
