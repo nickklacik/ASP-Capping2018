@@ -1,3 +1,9 @@
+.spacer {
+  width: 5%;
+  float: left;
+  text-align: center;
+}
+
 .p{
   font-family: Tahoma;
   size: 13px;
@@ -36,6 +42,7 @@
   background-color: white;
   color: black;
   font-family: Tahoma;
+  border: 3px solid black;
 }
 
 .headerLink:hover {
@@ -44,7 +51,7 @@
 
 .button {
   text-align: center; 
-  border-radius: 25px;
+  border-radius: 15px;
   background-color: white; 
   font-size: 24px; 
   width: 200px; 

@@ -29,7 +29,7 @@ require('session.php');
       <div style="font-family: Tahoma; font-size:15px; width: 30%; float: left; text-align: center;">
         Upload a photo
       </div>
-      <div style="font-family: Tahoma; font-size: 15px; width: 5%; float: left;"> &nbsp </div>
+    <div style="font-family: Tahoma; font-size: 15px; width: 5%; float: left;"> &nbsp </div>
       <div style="font-family: Tahoma; font-size: 15px; width: 30%; float: left; text-align: center;">
         Upload a style
       </div>
@@ -59,7 +59,7 @@ require('session.php');
     </p>
     <br><br><br>
     <div style="text-align: center;">
-      <span class="button" onclick="window.location.href = 'upload.php'">
+      <span class="button"  onclick="window.location.href = 'upload.php'">
         Try it out!
       </span>
     </div>
