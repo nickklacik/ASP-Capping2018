@@ -6,8 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $result = pg_query($conn, $sql);
   if(pg_num_rows($result) == 1) {
     $_SESSION['login_user'] = $_POST['email'];
-    echo $_SESSION['login_user'] . "<br>";
-    echo $_POST['email'];
     // verify password
     $sql = "SELECT password FROM Users WHERE email = '".$_POST['email']."'";
     $result = pg_query($conn, $sql);
@@ -19,10 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       if(password_verify($pass, $storedPass)) {
         header('Location: index.php');
       }
-    } else {
-	echo "Invalid Username or Password";
+      else {
+	$_SESSION['login_error'] = "Invalid username or password";
+      } 
     }
-  }	
+  } else {
+      $_SESSION['login_error'] = "Invalid username or password";
+  }	  
 }
 ?>
 <!doctype html>
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
-  <body id=bkg1 >
+  <body id="bkg1" >
     <?php
       require("functions.php");
       createHeader();
@@ -43,7 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		<input type="password" name="pass" placeholder="Password" required><br><br>
 		<input type="submit" name="login-submit" value="Login"><br><br>
 		</form>
-		<a href='register.php'>New User? Register here.</a>
+		<a href='register.php'>New User? Register here.</a><br><br>
+	
+	<?php
+	  if(isset($_SESSION['login_error'])) {
+	    echo $_SESSION['login_error'];
+	    unset($_SESSION['login_error']);
+	  }
+	?>
 	</div>
   </body>
 </html>
