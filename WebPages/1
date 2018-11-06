@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		<input type="text" name="first" placeholder="First Name" required><br><br>
 		<input type="text" name="last" placeholder="Last Name" required><br><br>
 		<input type="email" name="email" placeholder="Email" required><br><br>
-		<p style="font-family: Tahoma; font-size: 11px;"> Password requirements: At least 1 uppercase letter, number, special character, and minimum of 8 characters </p>
+		<p class="p"> Password requirements: At least 1 uppercase letter, number, special character, and minimum of 8 characters </p>
 		<input type="password" name="pass" placeholder="Password" required><br><br>
 		<input type="password" name="confpass" placeholder="Confirm Password" required><br><br>
 		<input type="submit" name="register-submit" value="Register">

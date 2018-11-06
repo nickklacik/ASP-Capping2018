@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" href="pablo.css">
   </head>
-  <body id="bkg1" >
+  <body id=bkg1 >
     <?php
       require("functions.php");
       createHeader();

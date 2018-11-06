@@ -31,18 +31,11 @@
   padding: 10px;
 }
 
-.spacer {
-  width: 5%;
-  float: left;
-  text-align: center;
-}
-
 .headerLink {
   padding: 9px 20px;
   background-color: white;
   color: black;
   font-family: Tahoma;
-  border: 3px solid black;
 }
 
 .headerLink:hover {
@@ -51,11 +44,12 @@
 
 .button {
   text-align: center; 
+  border-radius: 25px;
   background-color: white; 
-  border: 2px solid black; 
   font-size: 24px; 
   width: 200px; 
   padding: 10px;
+  border: 2px solid black;
   font-family: Tahoma;
 }
 
