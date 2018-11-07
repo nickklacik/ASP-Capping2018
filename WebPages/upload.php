@@ -29,13 +29,18 @@ if(empty($_SESSION['login_user'])) {
       <br>
       <input type="radio" name="StyleUpload" value="udnie.ckpt"> Udnie Style <br>
       <input type="radio" name="StyleUpload" value="wave.ckpt"> Wave Style <br>
-      <!-- <img src="udnie.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="<input type='hidden' name='StyleUpload' value='udnie.ckpt'>" width=150px height=150px>
-      <img src="wave.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="<input type='hidden' name='StyleUpload' value='wave.ckpt'>" width=150px height=150px>
-      <img src="la_muse.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="<input type='hidden' name='StyleUpload' value='la_muse.ckpt'>" width=150px height=150px>
+      <input type="radio" name="StyleUpload" value="la_muse.ckpt"> La Muse Style <br>
+      <input type="radio" name="StyleUpload" value="rain_princess.ckpt"> Rain Princess Style <br>
+      <input type="radio" name="StyleUpload" value="scream.ckpt"> Scream Style <br>
+      <input type="radio" name="StyleUpload" value="shipwreck.ckpt"> Shipwreck Style <br>
+
+      <!--<img src="udnie.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='udnie.ckpt'>" width=150px height=150px>
+      <img src="wave.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='wave.ckpt'>" width=150px height=150px>
+      <img src="la_muse.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='la_muse.ckpt'>" width=150px height=150px>
       <br>
-      <img src="rain_princess.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="<input type='hidden' name='StyleUpload' value='rain_princess.ckpt'>; border='5';" width=150px height=150px>
-      <img src="scream.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="<input type='hidden' name='StyleUpload' value='scream.ckpt'>" width=150px height=150px>
-      <img src="shipwreck.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="<input type='hidden' name='StyleUpload' value='wreck.ckpt'>" width=150px height=150px>
+      <img src="rain_princess.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='rain_princess.ckpt'>; border='5';" width=150px height=150px>
+      <img src="scream.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='scream.ckpt'>" width=150px height=150px>
+      <img src="shipwreck.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='wreck.ckpt'>" width=150px height=150px>
       <script>
         function big(x) {
           x.style.height = "200px";
