@@ -127,7 +127,7 @@ function uploadImage($fileName,$target_dir) {
 
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
-$style = "style/" . StyleUpload . 
+$style = "style/" . StyleUpload;
 
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
