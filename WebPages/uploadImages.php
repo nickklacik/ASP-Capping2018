@@ -127,21 +127,30 @@ function uploadImage($fileName,$target_dir) {
 
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
-$style = "style/" . StyleUpload;
+if(isset($_POST["submit"])){
+$style = "style/" . $_POST['StyleUpload'];
 
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
   chdir('/home/npadrazo/fast-style-transfer/');
-  $inputStr = 'python evaluate.py --checkpoint '. $style . '--in-path ' . $content . '--out-path /var/www/html/output';
-  exec($inputStr);
+  $inputStr = 'sudo -u npadrazo python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
+  echo $inputStr;
+  $resultErr = shell_exec($inputStr);
+  echo $resultErr;
   chdir($old_path);
   echo "<br>";
-  $path = "/var/www/html/output/".$style;
-  //$imageData  = base64_encode(file_get_contents($path));
-  //$src = 'data: '.mime_content_type($path).';base64,'.$imageData;
-  echo "<img src = \"" . $path . "\">";
+  echo $content;
   echo "<br>";
-  echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
+  $dispPath = str_replace("/var/www/uploads/content/","",$content);
+  echo $dispPath;
+  $path = "output/" . $dispPath;
+  $imageData  = base64_encode(file_get_contents($path));
+  $src = 'data: '.mime_content_type($path).';base64,'.$imageData;
+  echo '<img src = "' . $src . '">';
+  //echo '<img src = "/output/' . $dispPath . '">';
+  echo "<br>";
+  echo '<button data-cp-url="' . $src . '">Buy Now</button>';
+  //echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
 }
-
+}
 ?>
