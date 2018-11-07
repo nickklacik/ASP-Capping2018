@@ -25,7 +25,7 @@ require('session.php');
       
       <div style="text-align: center; width: 49%; display: inline-block;">
         <br>
-        <span class="button" onclick="alert('Buy')">
+        <span class="button" onclick="order()">
           Buy It Now!
         </span>
         <br><br><br>
@@ -42,18 +42,20 @@ require('session.php');
     <br><br><br>
     <div style="width: 100%; border: 2px solid black; overflow: auto">
       <?php 
-        $sql = "SELECT File_Path, Upload_Date FROM Photos WHERE email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC";
+        $sql = "SELECT File_Path, Photo_id, Upload_Date FROM Photos WHERE email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC";
         $result = pg_query($conn, $sql);
         if($row = pg_fetch_row($result)){
           $src = $row[0];
+          $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
-          echo "<script> updateImage('$src') </script>";
-	        echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src')\"></div>";
+          echo "<script> updateImage('$src', $id) </script>";
+	        echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id)\"></div>";
         }
         while($row = pg_fetch_row($result)){
           $src = $row[0];
+          $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
-          echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src')\"></div>"; 
+          echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id)\"></div>"; 
         }
       ?>
     </div>
