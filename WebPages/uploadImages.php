@@ -127,7 +127,7 @@ function uploadImage($fileName,$target_dir) {
 
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
-$style = "style/" . 
+$style = "style/" . StyleUpload . 
 
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
@@ -137,6 +137,8 @@ if(($content!="/var/www")&&($style!="/var/www")){
   chdir($old_path);
   echo "<br>";
   $path = "/var/www/html/output/".$style;
+  //$imageData  = base64_encode(file_get_contents($path));
+  //$src = 'data: '.mime_content_type($path).';base64,'.$imageData;
   echo "<img src = \"" . $path . "\">";
   echo "<br>";
   echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
