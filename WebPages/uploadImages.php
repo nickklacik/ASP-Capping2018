@@ -127,19 +127,21 @@ function uploadImage($fileName,$target_dir) {
 
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
-/*
-$style = "/var/www" . ltrim(styleImage("StyleUpload"),"..");
+$style = "style/" . StyleUpload;
+
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
-  chdir('/home/npadrazo/adain/AdaIN-style/');
-  $inputStr = 'th test.lua -gpu -1 -content ' . $content . ' -style '. $style . ' -gpu -1 -outputDir /var/www/html/output  2>&1';
-  $output = exec($inputStr);
+  chdir('/home/npadrazo/fast-style-transfer/');
+  $inputStr = 'python evaluate.py --checkpoint '. $style . '--in-path ' . $content . '--out-path /var/www/html/output';
+  exec($inputStr);
   chdir($old_path);
   echo "<br>";
-  $path = ltrim($output,"Output image saved at: /var/www/html");
+  $path = "/var/www/html/output/".$style;
+  //$imageData  = base64_encode(file_get_contents($path));
+  //$src = 'data: '.mime_content_type($path).';base64,'.$imageData;
   echo "<img src = \"" . $path . "\">";
   echo "<br>";
   echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
 }
-*/
+
 ?>
