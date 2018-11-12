@@ -42,7 +42,7 @@ require('session.php');
     <br><br><br>
     <div style="width: 100%; border: 2px solid black; overflow: auto">
       <?php 
-        $sql = "SELECT File_Path, Photo_id, Upload_Date FROM Photos WHERE email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC";
+        $sql = "SELECT preview_path, Photo_id, Upload_Date FROM Photos WHERE email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC";
         $result = pg_query($conn, $sql);
         if($row = pg_fetch_row($result)){
           $src = $row[0];
