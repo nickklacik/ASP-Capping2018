@@ -106,12 +106,15 @@ function watermarkImage($srcFilePath) {
 
   // Output and free memory
   //header('Content-type: image/png');
-  imagepng($destImage, '../uploads/content/watermarkedimage.png');
+  //imagepng($destImage, '../uploads/content/watermarkedimage.png');
   $sql = "SELECT photo_id FROM Photos ORDER BY photo_id DESC LIMIT 1";
   $result = pg_query($conn, $sql);
   if ($result) {
     $row = pg_fetch_array($result);
-    $sql = "UPDATE photos SET preview_path = '../uploads/content/watermarkedimage.png' WHERE photo_id = " . $row[0] ;
+    $preview_path = "../uploads/content/watermarked_" . $row[0] . ".png";
+    imagepng($destImage, $preview_path);
+    $sql = "UPDATE photos SET preview_path = '".$preview_path."' WHERE photo_id = " . $row[0];
+    echo $sql;
     $result = pg_query($conn, $sql);
     if ($result) {
       echo "photo table updated";
