@@ -27,20 +27,31 @@ if(empty($_SESSION['login_user'])) {
         Select style to apply:
       <br>
       <br>
-      <input type="radio" name="StyleUpload" value="udnie.ckpt"> Udnie Style <br>
-      <input type="radio" name="StyleUpload" value="wave.ckpt"> Wave Style <br>
-      <input type="radio" name="StyleUpload" value="la_muse.ckpt"> La Muse Style <br>
-      <input type="radio" name="StyleUpload" value="rain_princess.ckpt"> Rain Princess Style <br>
-      <input type="radio" name="StyleUpload" value="scream.ckpt"> Scream Style <br>
-      <input type="radio" name="StyleUpload" value="shipwreck.ckpt"> Shipwreck Style <br>
-
-      <!--<img src="udnie.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='udnie.ckpt'>" width=150px height=150px>
-      <img src="wave.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='wave.ckpt'>" width=150px height=150px>
-      <img src="la_muse.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='la_muse.ckpt'>" width=150px height=150px>
-      <br>
-      <img src="rain_princess.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='rain_princess.ckpt'>; border='5';" width=150px height=150px>
-      <img src="scream.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='scream.ckpt'>" width=150px height=150px>
-      <img src="shipwreck.jpg" onmouseover="big(this)" onmouseout="normal(this)" onclick="border();<input type='hidden' name='StyleUpload' value='wreck.ckpt'>" width=150px height=150px>
+      <label>
+      <input type="radio" name="StyleUpload" value="udnie.ckpt" style="display:none">
+      <img src="udnie.jpg" width=150px height=150px>
+      </label>
+      <label>
+      <input type="radio" name="StyleUpload" value="wave.ckpt">
+      <img src="wave.jpg" width=150px height=150px>
+      </label>
+      <label>  
+      <input type="radio" name="StyleUpload" value="la_muse.ckpt">
+      <img src="la_muse.jpg" width=150px height=150px>
+      </label>
+      <label>
+      <input type="radio" name="StyleUpload" value="rain_princess.ckpt">
+      <img src="rain_princess.jpg" width=150px height=150px>
+      </label>
+      <label>
+      <input type="radio" name="StyleUpload" value="scream.ckpt"> 
+      <img src="scream.jpg" width=150px height=150px>
+      </label>
+      <label>
+      <input type="radio" name="StyleUpload" value="wreck.ckpt">
+      <img src="shipwreck.jpg" width=150px height=150px>
+      </label>
+      <!--
       <script>
         function big(x) {
           x.style.height = "200px";
@@ -52,12 +63,8 @@ if(empty($_SESSION['login_user'])) {
           x.style.width = "150px";
           position = "absoulte";
         }
-        function border(x) {
-          border = "white";
-          border = "1px";
-        }
-      </script>
-      -->
+       </script>
+       -->
       </div> 
       <div align=center>
 	<input class="button" type="submit" value="Stylize!" name="submit">

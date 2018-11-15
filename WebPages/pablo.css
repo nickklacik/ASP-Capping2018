@@ -99,3 +99,16 @@
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+[type=radio] {
+  position: absolute;
+  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+[type=radio] + img {
+  cursor: pointer;
+}
+[type=radio]:checked + img {
+  outline: 10px solid red;
+}

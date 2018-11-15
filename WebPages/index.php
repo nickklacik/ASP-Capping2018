@@ -19,7 +19,7 @@ require('session.php');
 	$result = pg_query($conn, $sql);
 	if (pg_num_rows($result) == 1) {
 	  $row = pg_fetch_assoc($result);	
-          echo "<b><span style='font-family:Tahoma;font-size:15px;text-align:right;position:absolute'>Welcome, " . $row['first_name'] . "</span></b>";
+          echo "<b><span style='font-family:Tahoma;font-size:15px;color:white;text-align:right;position:absolute'> &nbsp Welcome, " . $row['first_name'] . "</span></b>";
 	}
       }
       require("functions.php");
