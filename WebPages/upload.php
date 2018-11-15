@@ -28,28 +28,28 @@ if(empty($_SESSION['login_user'])) {
       <br>
       <br>
       <label>
-      <input type="radio" name="StyleUpload" value="udnie.ckpt" style="display:none">
-      <img src="udnie.jpg" width=150px height=150px>
+      <input type="radio" name="StyleUpload" value="udnie.ckpt">
+      <img src="udnie.jpg" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>
       </label>
       <label>
       <input type="radio" name="StyleUpload" value="wave.ckpt">
-      <img src="wave.jpg" width=150px height=150px>
+      <img src="wave.jpg" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>
       </label>
       <label>  
       <input type="radio" name="StyleUpload" value="la_muse.ckpt">
-      <img src="la_muse.jpg" width=150px height=150px>
+      <img src="la_muse.jpg" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>
       </label>
       <label>
       <input type="radio" name="StyleUpload" value="rain_princess.ckpt">
-      <img src="rain_princess.jpg" width=150px height=150px>
+      <img src="rain_princess.jpg" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>
       </label>
       <label>
       <input type="radio" name="StyleUpload" value="scream.ckpt"> 
-      <img src="scream.jpg" width=150px height=150px>
+      <img src="scream.jpg" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>
       </label>
       <label>
-      <input type="radio" name="StyleUpload" value="wreck.ckpt">
-      <img src="shipwreck.jpg" width=150px height=150px>
+      <input type="radio" name="StyleUpload" id= "Style6" value="wreck.ckpt">
+      <img src="shipwreck.jpg" id="styleSelect" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>
       </label>
       <!--
       <script>
@@ -65,6 +65,12 @@ if(empty($_SESSION['login_user'])) {
         }
        </script>
        -->
+       <script>
+       function border(x) {
+          outline-style = "solid";
+          outline-color = "white";
+        }
+       </script>
       </div> 
       <div align=center>
 	<input class="button" type="submit" value="Stylize!" name="submit">
