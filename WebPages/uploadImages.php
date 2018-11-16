@@ -32,10 +32,17 @@ function insertPhotoIntoDB($target_file, $fileName) {
   global $conn;
   echo "<br>inserting into database<br>";
   if($target_file) {
-    //$id = getNewPhotoID();
+
+    $id = getNewPhotoID();
+    //$originalFileID = basename($_FILES[$fileName]["name"]) . "_" . $id;
+    //$target_file = "../uploads/content"; 
+    echo "file name is " . $target_file;
+    $newFileName = explode("content/",$target_file);
+    echo $newFileName[0];
+    echo $newFileName[1];
     
     $sql = "INSERT INTO Photos (file_name, file_path, email, upload_date, file_size, style_id) " 
-    . "VALUES ('".basename($_FILES[$fileName]["name"])."', '$target_file', '".$_SESSION['login_user']
+    . "VALUES ('".$newFileName[1]."', '$target_file', '".$_SESSION['login_user']
     ."', current_timestamp, ".$_FILES[$fileName]["size"].", 4);"; //style_id needs to be revisteed
     echo $sql ."<br>";
     $result = pg_query($conn, $sql);
@@ -78,7 +85,7 @@ function watermarkImage($srcFilePath) {
   $watermark_width = imagesx($watermark);
   $watermark_height = imagesy($watermark);
 
-  // this is an example to resized your watermark to 0.5% from their original size.
+  // this is an example to resized your watermark from their original size.
   // You can change this with your specific new sizes.
   $percent = 0.3;
   $newwidth = $watermark_width * $percent;
@@ -138,9 +145,19 @@ function styleImage($fileName){
   return uploadImage($fileName,$target_dir);
 }
 function uploadImage($fileName,$target_dir) {
+  $id = getNewPhotoID();
   $target_file = $target_dir . basename($_FILES[$fileName]["name"]);
   $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  echo "target file is " . $target_file;
+  $imageFileType = "." . strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  echo "image file type is " . "$imageFileType";
+  echo "file name " . $fileName;
+  $file_name = basename($_FILES[$fileName]["name"]);
+  if (strlen($file_name) > 30) {
+  	$file_name = substr($file_name, 0, 15);
+  }
+  $target_file = $target_dir . basename($file_name, "$imageFileType") . "_" . $id . $imageFileType;
+  echo "target file is ". $target_file;
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
       $check = getimagesize($_FILES[$fileName]["tmp_name"]);
@@ -163,8 +180,8 @@ function uploadImage($fileName,$target_dir) {
       $uploadOk = 0;
   }
   // Allow certain file formats
-  if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-  && $imageFileType != "gif" ) {
+  if($imageFileType != ".jpg" && $imageFileType != ".png" && $imageFileType != ".jpeg"
+  && $imageFileType != ".gif" ) {
       echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
   }
@@ -192,8 +209,8 @@ $style = "style/" . $_POST['StyleUpload'];
 //watermarkImage($content);
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
-  chdir('/home/developer/fast-style-transfer/');
-  $inputStr = 'sudo -u developer python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
+  chdir('/home/npadrazo/fast-style-transfer/');
+  $inputStr = 'sudo -u npadrazo python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
   echo $inputStr;
   $resultErr = shell_exec($inputStr);
   echo $resultErr;
@@ -212,9 +229,9 @@ if(($content!="/var/www")&&($style!="/var/www")){
   echo "<br>";
   echo $src;
   echo "<br>";
-  //echo '<button data-cp-url="' . $src . '">Buy Now</button>';
+  echo '<button data-cp-url="' . $src . '">Buy Now</button>';
   //header('Location: view.php');
-  echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
+  //echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
 }
 }
 ?>
