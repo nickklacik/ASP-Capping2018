@@ -192,8 +192,8 @@ $style = "style/" . $_POST['StyleUpload'];
 //watermarkImage($content);
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
-  chdir('/home/npadrazo/fast-style-transfer/');
-  $inputStr = 'sudo -u npadrazo python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
+  chdir('/home/developer/fast-style-transfer/');
+  $inputStr = 'sudo -u developer python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
   echo $inputStr;
   $resultErr = shell_exec($inputStr);
   echo $resultErr;
@@ -212,9 +212,9 @@ if(($content!="/var/www")&&($style!="/var/www")){
   echo "<br>";
   echo $src;
   echo "<br>";
-  echo '<button data-cp-url="' . $src . '">Buy Now</button>';
+  //echo '<button data-cp-url="' . $src . '">Buy Now</button>';
   //header('Location: view.php');
-  //echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
+  echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
 }
 }
 ?>
