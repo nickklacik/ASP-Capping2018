@@ -11,6 +11,7 @@ require('session.php');
     <title>Pastyle</title>
     <script src="view.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="pablo.css">
+    <meta property="og:image"  content="pablo.jpg" />
   </head>
   <body id=bkg2>
     <?php
@@ -29,15 +30,21 @@ require('session.php');
           Buy It Now!
         </span>
         <br><br><br>
-        <span class="button" onclick="alert('View Image')">
-          View Full Image
-        </span>
-        <br><br><br>
         <span class="button" onclick="alert('Print')">
           Print Image
         </span>
-        <br>
-      </div>
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2';
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+        <br><br><br>
+         <!-- Your share button code -->
+         <div class="fb-share-button" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
     </div>
     <br><br><br>
     <div style="width: 100%; border: 2px solid black; overflow: auto">
