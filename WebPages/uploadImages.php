@@ -41,9 +41,9 @@ function insertPhotoIntoDB($target_file, $fileName) {
     echo $newFileName[0];
     echo $newFileName[1];
     
-    $sql = "INSERT INTO Photos (file_name, file_path, email, upload_date, file_size, style_id) " 
+    $sql = "INSERT INTO Photos (file_name, file_path, email, upload_date, file_size) " 
     . "VALUES ('".$newFileName[1]."', '$target_file', '".$_SESSION['login_user']
-    ."', current_timestamp, ".$_FILES[$fileName]["size"].", 4);"; //style_id needs to be revisteed
+    ."', current_timestamp, ".$_FILES[$fileName]["size"].");";
     echo $sql ."<br>";
     $result = pg_query($conn, $sql);
     /*
@@ -85,11 +85,10 @@ function watermarkImage($srcFilePath) {
   $watermark_width = imagesx($watermark);
   $watermark_height = imagesy($watermark);
 
-  // this is an example to resized your watermark from their original size.
-  // You can change this with your specific new sizes.
+  // Resizing watermarks based on uploaded image size
   $percent = 0.3;
-  $newwidth = $watermark_width * $percent;
-  $newheight = $watermark_height * $percent;
+  $newwidth = imagesx($destImage) * $percent;
+  $newheight = $newwidth * $watermark_height / $watermark_width;
 
   // create a new image with the new dimension.
   $new_watermark = imagecreatetruecolor($newwidth, $newheight);
@@ -209,8 +208,8 @@ $style = "style/" . $_POST['StyleUpload'];
 //watermarkImage($content);
 if(($content!="/var/www")&&($style!="/var/www")){
   $old_path = getcwd();
-  chdir('/home/npadrazo/fast-style-transfer/');
-  $inputStr = 'sudo -u npadrazo python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
+  chdir('/home/developer/fast-style-transfer/');
+  $inputStr = 'sudo -u developer python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
   echo $inputStr;
   $resultErr = shell_exec($inputStr);
   echo $resultErr;
@@ -225,13 +224,13 @@ if(($content!="/var/www")&&($style!="/var/www")){
   $src = 'data: '.mime_content_type($path).';base64,'.$imageData;
   watermarkImage($src);
   echo '<img src = "' . $src . '">';
-  //echo '<img src = "/output/' . $dispPath . '">';
+  echo '<img src = "/output/' . $dispPath . '">';
   echo "<br>";
   echo $src;
   echo "<br>";
   echo '<button data-cp-url="' . $src . '">Buy Now</button>';
   //header('Location: view.php');
-  //echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
+  echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
 }
 }
 ?>
