@@ -16,7 +16,12 @@
 ![](https://github.com/nickklacik/ASP-Capping2018/blob/master/Homework/Wireframe.JPG )
 
 ![](https://github.com/nickklacik/ASP-Capping2018/blob/master/Homework/Wireframe_Upload.JPG )
+
 ### Our Machine Learning Style API:
+  The machine learnign style API that we use in our system to apply the styles to user content photos is a Fast Style Transfer in TensorFlow. TensorFlow is a library of numerical computations using data flow graphs that is installed on the system server. TensorFlow is used to train the fast style transfer network. 
+Link: https://github.com/lengstrom/fast-style-transfer
+
+### Image Watermarking:
 
 ### CanvasPop:
   CanvasPop is a photo printing service that we implemented in our application to allow users to have their stylized pictures printed on canvas. The CanvasPop API pop-up store was implemented by including the Javascript SDK, as seen below. 
