@@ -49,17 +49,18 @@ require('session.php');
     <br><br><br>
     <div style="width: 100%; border: 2px solid black; overflow: auto">
       <?php 
-        $sql = "SELECT preview_path, Photo_id, Upload_Date FROM Photos WHERE email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC";
+        $sql = "SELECT photos.preview_path, photos.Photo_id, photos.file_path, orders.order_id, photos.Upload_Date "
+        ."FROM Photos LEFT JOIN Orders ON photos.photo_id = orders.photo_id WHERE photos.email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC;";
         $result = pg_query($conn, $sql);
         if($row = pg_fetch_row($result)){
-          $src = $row[0];
+          $src = is_null($row[3]) ? $row[0] : $row[2];
           $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
           echo "<script> updateImage('$src', $id) </script>";
 	        echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id)\"></div>";
         }
         while($row = pg_fetch_row($result)){
-          $src = $row[0];
+          $src = is_null($row[3]) ? $row[0] : $row[2];
           $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
           echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id)\"></div>"; 

@@ -22,6 +22,12 @@
     "customer" => $customer->id
   ));
   //Do database stuff
+  require_once('session.php');
+  $sql = "INSERT INTO Orders (email, photo_id, order_date, price) " 
+    . "VALUES ('".$_SESSION['login_user']."', '$photo_id', "
+    ."current_timestamp, 50);";
+  echo $sql ."<br>";
+  $result = pg_query($conn, $sql);
 
   // Redirect to success
   header('Location: success.php?tid='.$charge->id.'&product='.$charge->description.'&photo_id='.$photo_id);
