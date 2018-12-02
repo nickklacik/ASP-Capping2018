@@ -33,6 +33,10 @@ require('session.php');
         <span class="button" onclick="alert('Print')">
           Print Image
         </span>
+        <br><br><br>
+        <span class="button" onclick="deleteImage()">
+          Delete Image
+        </span>
         <!-- Load Facebook SDK for JavaScript -->
         <div id="fb-root"></div>
             <script>(function(d, s, id) {

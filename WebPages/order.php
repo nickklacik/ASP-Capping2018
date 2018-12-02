@@ -3,7 +3,7 @@
     $GET = filter_var_array($_GET, FILTER_SANITIZE_STRING);
     $photo_id = $GET['photo_id'];
   } else {
-    header('Location: index.php');
+    header('Location: view.php');
   }
 ?>
 <html>

@@ -1,10 +1,19 @@
 var photo_id;
 
+// Updates the src of the main image tag
 function updateImage(newSrc, id) {
   document.getElementById("image").src = newSrc;
   photo_id = id;
 }
 
+// Redirects user to order page
 function order() {
   window.location.href = "order.php?photo_id="+photo_id;
+}
+
+// Deletes Image from user's account
+function deleteImage() {
+  if(confirm("Are your sure you want to delete this image from your account?")) {
+    window.location.href = "delete.php?photo_id="+photo_id;
+  }
 }
