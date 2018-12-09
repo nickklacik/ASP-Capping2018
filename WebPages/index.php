@@ -31,7 +31,7 @@ require('session.php');
       </div>
     <div style="font-family: Tahoma; font-size: 15px; width: 5%; float: left;"> &nbsp </div>
       <div style="font-family: Tahoma; font-size: 15px; width: 30%; float: left; text-align: center;">
-        Upload a style
+        Choose a style
       </div>
       <div style="width: 5%; float: left;"> &nbsp </div>
       <div style="font-family: Tahoma; font-size: 15px; width: 30%; float: left; text-align: center;">
@@ -41,19 +41,19 @@ require('session.php');
     <br>
     <p>
       <div style="width: 30%; float: left;">
-        <img id="OGImage" src="newyork.jpg" style="width: 100%;">
+        <img id="OGImage" src="redd.jpg" style="width: 100%;">
       </div>
       <div class="spacer">
         +
       </div>
       <div style="width: 30%; float: left;">
-        <img src="brushstrokes.jpg" style=" width: 100%">
+        <img src="thewave.jpg" style=" width: 100%">
       </div>
       <div class="spacer">
         =
       </div>
       <div style="width: 30%; float: left;">
-        <img src="newyork_brushstrokes_preservecolor.jpg" style="width: 100%">
+        <img src="redstyle.jpg" style="width: 100%">
       </div>
       &nbsp
     </p>

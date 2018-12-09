@@ -16,9 +16,8 @@
 }
 
 #bkg2 {
-  background-image: url("gray.jpg");
-  width: 100%;
-  background-size: cover;
+  height: 900px;
+  background-image: linear-gradient(to bottom right, gray, whitesmoke);
 }
 
 #h1 {
