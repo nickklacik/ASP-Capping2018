@@ -135,14 +135,15 @@
   }
 }
 .about_column {
-  float: left;
   display: inline-block;
   width: 15%;
   padding: 5px;
 }
 .about_row::after{
   content: "";
-  align: center;
   clear: both;
   display: table;
+  position: absolute;
+  margin:0 auto;
+  text-align: center;
 }

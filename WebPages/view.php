@@ -11,6 +11,7 @@ require('session.php');
     <title>Pastyle</title>
     <script src="view.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="pablo.css">
+    <link rel="icon" href="logo.png">
     <meta property="og:image"  content="pablo.jpg" />
   </head>
   <body id=bkg2>
