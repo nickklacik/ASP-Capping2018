@@ -1,9 +1,9 @@
+<!-- Checks to see if user is logged via session, otherwise forces login -->
 <?php
 require('session.php');
 if(empty($_SESSION['login_user'])) {
   header('Location: login.php');
 }
-
 ?>
 <!doctype html>
 <html>
@@ -19,10 +19,12 @@ if(empty($_SESSION['login_user'])) {
       require("functions.php");
       createHeader();
     ?>
+	<!-- Brief Project Description -->
 	<h1 id=h1 align="center"> About Pastyle </h1>
 	<p  align="center" style="padding-left:50px;padding-right:50px;font-family:Tahoma;font-size:20px;"> Pastyle is an application created by a team of students from the Marist College Class of 2019. This application serves as their senior capping project for the great Pablo Rivas. The students came up with the name Pastyle by comining the words "pastel" and "style". Pastyle is a service that will allow users to upload their own content and styles and then stylize their content using machine learning. The machine learning API used is a Fast Style Transfer in Tensorflow created by Logan Engstrom. Link: <a href="https://github.com/lengstrom/fast-style-transfer" target="_blank"> Fast Style Transfer </a> </p>
 	<h2 id=h1> Meet the Team </h2>
 	<br>
+	<!-- Images of the team -->
 	<div class="about_row" align="center">
 			<div class="about_column">
 				<img src="kevin.jpg" style="width:80%;height:auto;">
