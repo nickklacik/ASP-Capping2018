@@ -35,7 +35,8 @@ function insertPhotoIntoDB($target_file, $fileName) {
 
     $id = getNewPhotoID();
     //$originalFileID = basename($_FILES[$fileName]["name"]) . "_" . $id;
-    //$target_file = "../uploads/content"; 
+    //$target_file = "../uploads/content";
+    //$target_file = str_replace(' ', '_', $target_file); 
     echo "file name is " . $target_file;
     $newFileName = explode("content/",$target_file);
     echo $newFileName[0];
@@ -43,7 +44,7 @@ function insertPhotoIntoDB($target_file, $fileName) {
     
     $sql = "INSERT INTO Photos (file_name, file_path, email, upload_date, file_size) " 
     . "VALUES ('".$newFileName[1]."', '$target_file', '".$_SESSION['login_user']
-    ."', current_timestamp, ".$_FILES[$fileName]["size"].");";
+    ."', current_timestamp, ".$_FILES[$fileName]["size"].");"; //style_id needs to be revisteed
     echo $sql ."<br>";
     $result = pg_query($conn, $sql);
     /*
@@ -85,7 +86,7 @@ function watermarkImage($srcFilePath) {
   $watermark_width = imagesx($watermark);
   $watermark_height = imagesy($watermark);
 
-  // Resizing watermarks based on uploaded image size
+  // Resizing the watermark based on size of uploaded image
   $percent = 0.3;
   $newwidth = imagesx($destImage) * $percent;
   $newheight = $newwidth * $watermark_height / $watermark_width;
@@ -98,7 +99,6 @@ function watermarkImage($srcFilePath) {
   imagesavealpha($new_watermark, true);
 
   // copy $watermark, and resized, into $new_watermark
-  // change to `imagecopyresampled` for better quality
   imagecopyresampled($new_watermark, $watermark, 0, 0, 0, 0, $newwidth, $newheight, $watermark_width, $watermark_height);
 
   $_Dimx = imagesx($destImage);
@@ -145,6 +145,7 @@ function styleImage($fileName){
 }
 function uploadImage($fileName,$target_dir) {
   $id = getNewPhotoID();
+  //$target_file = $target_dir . preg_replace('/\s+/', '_', basename($file_name, "$imageFileType")) . "_" . $id . $imageFileType;
   $target_file = $target_dir . basename($_FILES[$fileName]["name"]);
   $uploadOk = 1;
   echo "target file is " . $target_file;
@@ -155,7 +156,8 @@ function uploadImage($fileName,$target_dir) {
   if (strlen($file_name) > 30) {
   	$file_name = substr($file_name, 0, 15);
   }
-  $target_file = $target_dir . basename($file_name, "$imageFileType") . "_" . $id . $imageFileType;
+  $target_file = $target_dir . str_replace(' ', '_', basename($file_name, "$imageFileType")) . "_" . $id . $imageFileType; 
+  //$target_file = $target_dir . basename($file_name, "$imageFileType") . "_" . $id . $imageFileType;
   echo "target file is ". $target_file;
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
@@ -199,38 +201,46 @@ function uploadImage($fileName,$target_dir) {
       }
   }
 }
-
+$startTime = microtime(true);
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
 echo "<br><br>";
-//watermarkImage($content);
+
 if(isset($_POST["submit"])){
-$style = "style/" . $_POST['StyleUpload'];
-//watermarkImage($content);
-if(($content!="/var/www")&&($style!="/var/www")){
-  $old_path = getcwd();
-  chdir('/home/developer/fast-style-transfer/');
-  $inputStr = 'sudo -u developer python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
-  echo $inputStr;
-  $resultErr = shell_exec($inputStr);
-  echo $resultErr;
-  chdir($old_path);
-  echo "<br>";
-  echo $content;
-  echo "<br>";
-  $dispPath = str_replace("/var/www/uploads/content/","",$content);
-  echo $dispPath;
-  $path = "output/" . $dispPath;
-  $imageData  = base64_encode(file_get_contents($path));
-  $src = 'data: '.mime_content_type($path).';base64,'.$imageData;
-  watermarkImage($src);
-  echo '<img src = "' . $src . '">';
-  echo '<img src = "/output/' . $dispPath . '">';
-  echo "<br>";
-  echo $src;
-  echo "<br>";
-  echo '<button data-cp-url="' . $src . '">Buy Now</button>';
-  //header('Location: view.php');
-  echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
-}
+  $style = "style/" . $_POST['StyleUpload'];
+  if(($content!="/var/www")&&($style!="/var/www")){
+    $old_path = getcwd();
+    chdir('/home/developer/fast-style-transfer/');
+    $inputStr = 'sudo -u developer python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
+    echo $inputStr;
+    $resultErr = shell_exec($inputStr);
+    echo $resultErr;
+    chdir($old_path);
+    echo "<br>";
+    echo $content;
+    echo "<br>";
+    $dispPath = str_replace("/var/www/uploads/content/","",$content);
+    echo $dispPath;
+    $path = "output/" . $dispPath;
+    $imageData  = base64_encode(file_get_contents($path));
+    $src = 'data: '.mime_content_type($path).';base64,'.$imageData;
+    watermarkImage($src);
+    $processTime = (microtime(true) - $startTime);
+    echo $processTime;
+    $sql = "UPDATE photos SET processing_time = $processTime where photo_id = (SELECT photo_id from photos ORDER BY photo_id DESC LIMIT 1)";
+    echo $sql;
+    $result = pg_query($conn, $sql);
+    if ($result) {
+      echo "processing time updated";
+    } else {
+        echo pg_last_error($conn);
+    }
+    //echo '<img src = "' . $src . '">';
+    echo '<img src = "/output/' . $dispPath . '">';
+    echo "<br>";
+    echo $src;
+    echo "<br>";
+    //header('Location: view.php');
+    echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
+  }
 }
 ?>
