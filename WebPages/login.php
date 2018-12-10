@@ -23,7 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
   } else {
       $_SESSION['login_error'] = "Invalid username or password";
-  }	  
+  }
+  // Check if user is admin
+  $sql = "SELECT email from Users where email = '".$_POST['email']."' AND is_Admin = 't'"; 
+  $result = pg_query($conn, $sql);
+  if(pg_num_rows($result) == 1) {
+    $_SESSION['is_admin'] = true;	  
+  }
 }
 ?>
 <!doctype html>

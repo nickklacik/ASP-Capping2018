@@ -28,11 +28,14 @@ if(empty($_SESSION['login_user'])) {
     <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date");
-    $uploads = pg_fetch_assoc($result);
-    echo $uploads['count'];
+    $result = pg_query($conn, "SELECT COUNT(upload_date), SUM(processing_time), AVG(processing_time), SUM(file_size) FROM PHOTOS WHERE upload_date::date = current_date - 1");
+    $stats = pg_fetch_array($result);
+    echo $stats[0];
     ?>
-    <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
+	    <br> Total Processing Time (Seconds): <?php echo $stats[1] ?>
+	    <br> Average Processing Time (Seconds): <?php echo $stats[2] ?>
+	    <br> Total File Size Uploaded (MB): <?php echo ($stats[3] / 1000000)?></p> 
+
     <table>
     <tr>
       <td>12a</td>
@@ -93,11 +96,14 @@ if(empty($_SESSION['login_user'])) {
     <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -2");
-    $uploads = pg_fetch_assoc($result);
-    echo $uploads['count'];
+    $result = pg_query($conn, "SELECT COUNT(upload_date), SUM(processing_time), AVG(processing_time), SUM(file_size) FROM PHOTOS WHERE upload_date::date = current_date - 2");
+    $stats = pg_fetch_array($result);
+    echo $stats[0];
     ?>
-    <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
+	    <br> Total Processing Time (Seconds): <?php echo $stats[1] ?>
+	    <br> Average Processing Time (Seconds): <?php echo $stats[2] ?>
+	    <br> Total File Size Uploaded (MB): <?php echo ($stats[3] / 1000000)?></p> 
+    
     <table>
     <tr>
       <td>12a</td>
@@ -159,11 +165,14 @@ if(empty($_SESSION['login_user'])) {
     <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -3");
-    $uploads = pg_fetch_assoc($result);
-    echo $uploads['count'];
+    $result = pg_query($conn, "SELECT COUNT(upload_date), SUM(processing_time), AVG(processing_time), SUM(file_size) FROM PHOTOS WHERE upload_date::date = current_date - 3");
+    $stats = pg_fetch_array($result);
+    echo $stats[0];
     ?>
-    <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
+	    <br> Total Processing Time (Seconds): <?php echo $stats[1] ?>
+	    <br> Average Processing Time (Seconds): <?php echo $stats[2] ?>
+	    <br> Total File Size Uploaded (MB): <?php echo ($stats[3] / 1000000)?></p> 
+
     <table>
     <tr>
       <td>12a</td>
@@ -225,11 +234,15 @@ if(empty($_SESSION['login_user'])) {
     <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -4");
-    $uploads = pg_fetch_assoc($result);
-    echo $uploads['count'];
+    $result = pg_query($conn, "SELECT COUNT(upload_date), SUM(processing_time), AVG(processing_time), SUM(file_size) FROM PHOTOS WHERE upload_date::date = current_date - 4");
+    $stats = pg_fetch_array($result);
+    echo $stats[0];
     ?>
-    <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
+	    <br> Total Processing Time (Seconds): <?php echo $stats[1] ?>
+	    <br> Average Processing Time (Seconds): <?php echo $stats[2] ?>
+	    <br> Total File Size Uploaded (MB): <?php echo ($stats[3] / 1000000)?></p> 
+
+
     <table>
     <tr>
       <td>12a</td>
@@ -291,11 +304,15 @@ if(empty($_SESSION['login_user'])) {
     <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -5");
-    $uploads = pg_fetch_assoc($result);
-    echo $uploads['count'];
+    $result = pg_query($conn, "SELECT COUNT(upload_date), SUM(processing_time), AVG(processing_time), SUM(file_size) FROM PHOTOS WHERE upload_date::date = current_date - 5");
+    $stats = pg_fetch_array($result);
+    echo $stats[0];
     ?>
-    <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
+	    <br> Total Processing Time (Seconds): <?php echo $stats[1] ?>
+	    <br> Average Processing Time (Seconds): <?php echo $stats[2] ?>
+	    <br> Total File Size Uploaded (MB): <?php echo ($stats[3] / 1000000)?></p> 
+
+
     <table>
     <tr>
       <td>12a</td>
@@ -357,11 +374,13 @@ if(empty($_SESSION['login_user'])) {
     <p style="padding-left:10px;">Images Uploaded:
     <?php
     $conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres");
-    $result = pg_query($conn, "SELECT COUNT(upload_date) FROM PHOTOS WHERE upload_date::date = current_date -6");
-    $uploads = pg_fetch_assoc($result);
-    echo $uploads['count'];
+    $result = pg_query($conn, "SELECT COUNT(upload_date), SUM(processing_time), AVG(processing_time), SUM(file_size) FROM PHOTOS WHERE upload_date::date = current_date - 6");
+    $stats = pg_fetch_array($result);
+    echo $stats[0];
     ?>
-    <br> Images Stylized: <br> Total Processing Time (Seconds): </p> 
+	    <br> Total Processing Time (Seconds): <?php echo $stats[1] ?>
+	    <br> Average Processing Time (Seconds): <?php echo $stats[2] ?>
+	    <br> Total File Size Uploaded (MB): <?php echo ($stats[3] / 1000000)?></p>   
     <table>
     <tr>
       <td>12a</td>

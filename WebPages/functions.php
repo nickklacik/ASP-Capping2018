@@ -10,6 +10,9 @@ function createHeader() {
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'about.php'\">About</span>"
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'view.php'\">View</span>"
     .    "<span class=\"headerLink\" onclick=\"window.location.href = 'upload.php'\">Upload</span>";
+  if(isset($_SESSION['is_admin'])) {
+    echo  "<span class=\"headerLink\" onclick=\"window.location.href = 'admin.php'\">Admin</span>";
+  } 
   if(isset($_SESSION['login_user'])) {
     echo  "<span class=\"headerLink\" onclick=\"window.location.href = 'logout.php'\">Logout</span>";
   } 
