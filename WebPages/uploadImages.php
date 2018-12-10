@@ -30,22 +30,22 @@ function getNewPhotoID() {
 
 function insertPhotoIntoDB($target_file, $fileName) {
   global $conn;
-  echo "<br>inserting into database<br>";
+  //echo "<br>inserting into database<br>";
   if($target_file) {
 
     $id = getNewPhotoID();
     //$originalFileID = basename($_FILES[$fileName]["name"]) . "_" . $id;
     //$target_file = "../uploads/content";
     //$target_file = str_replace(' ', '_', $target_file); 
-    echo "file name is " . $target_file;
+    //echo "file name is " . $target_file;
     $newFileName = explode("content/",$target_file);
-    echo $newFileName[0];
-    echo $newFileName[1];
+    //echo $newFileName[0];
+    //echo $newFileName[1];
     
     $sql = "INSERT INTO Photos (file_name, file_path, email, upload_date, file_size) " 
     . "VALUES ('".$newFileName[1]."', '$target_file', '".$_SESSION['login_user']
     ."', current_timestamp, ".$_FILES[$fileName]["size"].");"; //style_id needs to be revisteed
-    echo $sql ."<br>";
+    //echo $sql ."<br>";
     $result = pg_query($conn, $sql);
     /*
     $insert['file_name'] = basename($_FILES[$fileName]["name"]);
@@ -60,13 +60,13 @@ function insertPhotoIntoDB($target_file, $fileName) {
     var_dump($result);
     
     if ($status === PGSQL_CONNECTION_OK) {
-      echo 'Connection status ok';
+      //echo 'Connection status ok';
     } else {
       echo 'Connection status bad';
     }
     
     if($result) {
-      echo "successfully insert into database";
+      //echo "successfully insert into database";
     } else {
       echo "failed to insert into database<br>";
       echo pg_last_error($conn);
@@ -79,7 +79,7 @@ function watermarkImage($srcFilePath) {
   global $conn;
   // Load the stamp and the photo to apply the watermark to
   //$stamp = imagecreatefromjpeg('logo.jpg');
-  echo $srcFilePath;
+  //echo $srcFilePath;
   $destImage = imagecreatefromjpeg($srcFilePath);
 
   $watermark = imagecreatefrompng('logo_transparent.png');
@@ -120,12 +120,12 @@ function watermarkImage($srcFilePath) {
     $preview_path = "../uploads/content/watermarked_" . $row[0] . ".png";
     imagepng($destImage, $preview_path);
     $sql = "UPDATE photos SET preview_path = '".$preview_path."' WHERE photo_id = " . $row[0];
-    echo $sql;
+    //echo $sql;
     $result = pg_query($conn, $sql);
     if ($result) {
-      echo "photo table updated";
+      //echo "photo table updated";
     } else {
-        echo pg_last_error($conn);
+      echo pg_last_error($conn);
     }
   } else {
       echo pg_last_error($conn);
@@ -145,20 +145,20 @@ function styleImage($fileName){
 }
 function uploadImage($fileName,$target_dir) {
   $id = getNewPhotoID();
-  //$target_file = $target_dir . preg_replace('/\s+/', '_', basename($file_name, "$imageFileType")) . "_" . $id . $imageFileType;
+  $target_file = $target_dir . preg_replace('/\s+/', '_', basename($file_name, "$imageFileType")) . "_" . $id . $imageFileType;
   $target_file = $target_dir . basename($_FILES[$fileName]["name"]);
   $uploadOk = 1;
-  echo "target file is " . $target_file;
+  //echo "target file is " . $target_file;
   $imageFileType = "." . strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  echo "image file type is " . "$imageFileType";
-  echo "file name " . $fileName;
+  //echo "image file type is " . "$imageFileType";
+  //echo "file name " . $fileName;
   $file_name = basename($_FILES[$fileName]["name"]);
   if (strlen($file_name) > 30) {
   	$file_name = substr($file_name, 0, 15);
   }
   $target_file = $target_dir . str_replace(' ', '_', basename($file_name, "$imageFileType")) . "_" . $id . $imageFileType; 
   //$target_file = $target_dir . basename($file_name, "$imageFileType") . "_" . $id . $imageFileType;
-  echo "target file is ". $target_file;
+  //echo "target file is ". $target_file;
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
       $check = getimagesize($_FILES[$fileName]["tmp_name"]);
@@ -201,9 +201,10 @@ function uploadImage($fileName,$target_dir) {
       }
   }
 }
+echo "We are currently processing your image! <br>";
 $startTime = microtime(true);
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
-echo "<br><br>";
+//echo "<br><br>";
 
 if(isset($_POST["submit"])){
   $style = "style/" . $_POST['StyleUpload'];
@@ -211,36 +212,38 @@ if(isset($_POST["submit"])){
     $old_path = getcwd();
     chdir('/home/developer/fast-style-transfer/');
     $inputStr = 'sudo -u developer python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
-    echo $inputStr;
+    //echo $inputStr;
     $resultErr = shell_exec($inputStr);
-    echo $resultErr;
+    //echo $resultErr;
     chdir($old_path);
-    echo "<br>";
-    echo $content;
-    echo "<br>";
+    //echo "<br>";
+    //echo $content;
+    //echo "<br>";
     $dispPath = str_replace("/var/www/uploads/content/","",$content);
-    echo $dispPath;
+    //echo $dispPath;
     $path = "output/" . $dispPath;
     $imageData  = base64_encode(file_get_contents($path));
     $src = 'data: '.mime_content_type($path).';base64,'.$imageData;
     watermarkImage($src);
     $processTime = (microtime(true) - $startTime);
-    echo $processTime;
+    //echo $processTime;
     $sql = "UPDATE photos SET processing_time = $processTime where photo_id = (SELECT photo_id from photos ORDER BY photo_id DESC LIMIT 1)";
-    echo $sql;
+    //echo $sql;
     $result = pg_query($conn, $sql);
     if ($result) {
-      echo "processing time updated";
+      //echo "processing time updated";
     } else {
-        echo pg_last_error($conn);
+      //echo pg_last_error($conn);
     }
-    //echo '<img src = "' . $src . '">';
+    /*echo '<img src = "' . $src . '">';
     echo '<img src = "/output/' . $dispPath . '">';
     echo "<br>";
     echo $src;
     echo "<br>";
-    //header('Location: view.php');
-    echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
+    header('Location: view.php');
+    */
+    echo '<script>window.location.href="view.php";</script>';
+    //echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
   }
 }
 ?>
