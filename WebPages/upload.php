@@ -39,6 +39,7 @@ if(empty($_SESSION['login_user'])) {
       <input type="radio" name="StyleUpload" value="la_muse.ckpt">
       <img src="la_muse.jpg" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>
       </label>
+      <br>
       <label>
       <input type="radio" name="StyleUpload" value="rain_princess.ckpt">
       <img src="rain_princess.jpg" onmouseover="big(this)" onmouseout="normal(this)" width=150px height=150px>

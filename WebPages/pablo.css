@@ -3,7 +3,6 @@
   float: left;
   text-align: center;
 }
-
 .p{
   font-family: Tahoma;
   size: 13px;
@@ -11,12 +10,12 @@
 
 #bkg1 {
   background-image: url("sky.jpg");
-  width: 100%;
+  max-width: 100%;
   background-size: cover;
 }
 
 #bkg2 {
-  height: 900px;
+  height: 1080px;
   background-image: linear-gradient(to bottom right, gray, whitesmoke);
 }
 
@@ -110,4 +109,40 @@
 }
 [type=radio]:checked + img {
   outline: 10px solid red;
+}
+@media only screen and (max-device-width: 1080px) {
+  div#wrapper {
+      width: 400px;
+  }
+
+  div#header {
+      height: 93px;
+      position: relative;
+  }
+
+  div#header h1 {
+      font-size: 140%;
+  }
+
+  #content {
+      float: none;
+      width: 100%;
+  }
+
+  #navigation {
+      float:none;
+      width: auto;
+  }
+}
+.about_column {
+  float: left;
+  display: inline-block;
+  width: 15%;
+  padding: 5px;
+}
+.about_row::after{
+  content: "";
+  align: center;
+  clear: both;
+  display: table;
 }
