@@ -40,7 +40,7 @@ require('session.php');
       <div style="text-align: center; width: 49%; display: inline-block;">
         <br>
         <span class="button" onclick="order()">
-          Buy It Now!
+          Remove Watermark
         </span>
         <br><br><br>
         <span class="button" id="printBtn" data-cp-url="pablo.jpg">
