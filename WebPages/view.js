@@ -1,9 +1,14 @@
 var photo_id;
 
 // Updates the src of the main image tag
-function updateImage(newSrc, id) {
+function updateImage(newSrc, id, purchased) {
   document.getElementById("image").src = newSrc;
   photo_id = id;
+  if(purchased) {
+    document.getElementById("watermark").innerHTML = "";
+  } else {
+    document.getElementById("watermark").innerHTML = "<span class=\"button\" onclick=\"order()\">Remove Watermark</span>";
+  }
 }
 
 // Redirects user to order page

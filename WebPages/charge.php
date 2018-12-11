@@ -18,15 +18,15 @@
   $charge = \Stripe\Charge::create(array(
     "amount" => 50,
     "currency" => "usd",
-    "description" => "PABLO Stylized Image",
+    "description" => "Pablo Style order",
     "customer" => $customer->id
   ));
   
   // Create Order Record
   require_once('session.php');
-  $sql = "INSERT INTO Orders (email, photo_id, order_date, price) " 
+  $sql = "INSERT INTO Orders (email, photo_id, order_date) " 
     . "VALUES ('".$_SESSION['login_user']."', '$photo_id', "
-    ."current_timestamp, 0.50);";
+    ."current_timestamp);";
   $result = pg_query($conn, $sql);
   
   // Get watermark file path

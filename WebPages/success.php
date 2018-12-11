@@ -18,7 +18,7 @@
 </head>
 <body>
   <div class="container mt-4">
-    <h2>Thank you for purchasing <?php echo $product; ?></h2>
+    <h2>Thank you for your <?php echo $product; ?></h2>
     <p><a href="view.php" class="btn btn-light mt-2">Go Back</a></p>
   </div>
 </body>
