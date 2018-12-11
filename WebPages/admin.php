@@ -4,6 +4,9 @@ if(empty($_SESSION['login_user'])) {
   header('Location: login.php');
 
 }
+if(!$_SESSION['is_admin']) {
+  header('Location: index.php');
+}
 
 ?>
 <!doctype html>
