@@ -7,6 +7,19 @@ require('session.php');
 <!doctype html>
 <html>
   <head>
+    <!--CanvasPop API-->
+    <div id="cp-store-root" data-cp-settings='{ "access_key": "2018f14870776764ef3f8d5a35ba24f1" }'></div>
+    <script>
+      (function ( d, s, id ) {
+        var js, cpJs = d.getElementsByTagName( s )[0], t = new Date();
+        if ( d.getElementById( id ) ) return;
+        js = d.createElement( s );
+        js.id = id;
+        js.setAttribute( 'data-cp-url', 'https://store.canvaspop.com' );
+        js.src = 'https://store.canvaspop.com/static/js/cpopstore.js?bust=' + t.getTime();
+        cpJs.parentNode.insertBefore( js, cpJs );
+      }( document, 'script', 'canvaspop-jssdk' ));
+    </script>
     <meta charset="UTF-8"/>
     <title>Pastyle</title>
     <script src="view.js" type="text/javascript"></script>
@@ -24,7 +37,6 @@ require('session.php');
       <div style="width: 49%; display: inline-block; float: left;">
         <img id="image" src="pablo.jpg" style="width: 100%;">
       </div>
-      
       <div style="text-align: center; width: 49%; display: inline-block;">
         <br>
         <span id="watermark">
@@ -33,7 +45,7 @@ require('session.php');
           </span>
         </span>
         <br><br><br>
-        <span class="button" onclick="alert('Print')">
+        <span class="button" id="printBtn" data-cp-url="pablo.jpg">
           Print Image
         </span>
         <br><br><br>
@@ -55,7 +67,7 @@ require('session.php');
     </div>
     <br><br><br>
     <div style="width: 100%; border: 2px solid black; overflow: auto">
-      <?php 
+      <?php
         $sql = "SELECT photos.preview_path, photos.Photo_id, photos.file_path, orders.order_id, photos.Upload_Date "
         ."FROM Photos LEFT JOIN Orders ON photos.photo_id = orders.photo_id WHERE photos.email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC;";
         $result = pg_query($conn, $sql);

@@ -34,30 +34,16 @@ function insertPhotoIntoDB($target_file, $fileName) {
   if($target_file) {
 
     $id = getNewPhotoID();
-    //$originalFileID = basename($_FILES[$fileName]["name"]) . "_" . $id;
-    //$target_file = "../uploads/content";
-    //$target_file = str_replace(' ', '_', $target_file); 
-    //echo "file name is " . $target_file;
-    $newFileName = explode("content/",$target_file);
-    //echo $newFileName[0];
-    //echo $newFileName[1];
+    $newFileName = explode("output/",$target_file);
+    
+    $fileSize = filesize($target_file);
     
     $sql = "INSERT INTO Photos (file_name, file_path, email, upload_date, file_size) " 
     . "VALUES ('".$newFileName[1]."', '$target_file', '".$_SESSION['login_user']
-    ."', current_timestamp, ".$_FILES[$fileName]["size"].");"; //style_id needs to be revisteed
-    //echo $sql ."<br>";
+    ."', current_timestamp, $fileSize)"; 
+   
     $result = pg_query($conn, $sql);
-    /*
-    $insert['file_name'] = basename($_FILES[$fileName]["name"]);
-    $insert['file_path'] = $target_file;
-    $insert['email'] = $_SESSION['login_user'];
-    $insert['upload_date'] = microtime();
-    $insert['file_size'] = $_FILES[$fileName]["size"];
-    $insert['style_id'] = 4; //test value
-    $result = pg_insert($conn, "Photos", $insert, PGSQL_DML_STRING);
-    */
     $status = pg_connection_status($conn);
-    var_dump($result);
     
     if ($status === PGSQL_CONNECTION_OK) {
       //echo 'Connection status ok';
@@ -78,8 +64,7 @@ function insertPhotoIntoDB($target_file, $fileName) {
 function watermarkImage($srcFilePath) {
   global $conn;
   // Load the stamp and the photo to apply the watermark to
-  //$stamp = imagecreatefromjpeg('logo.jpg');
-  //echo $srcFilePath;
+ 
   $destImage = imagecreatefromjpeg($srcFilePath);
 
   $watermark = imagecreatefrompng('logo_transparent.png');
@@ -136,7 +121,7 @@ function watermarkImage($srcFilePath) {
 function contentImage($fileName){
   $target_dir = "../uploads/content/";
   $target_file =  uploadImage($fileName,$target_dir);
-  insertPhotoIntoDB($target_file, $fileName);
+  //insertPhotoIntoDB($target_file, $fileName);
   return $target_file;
 }
 function styleImage($fileName){
@@ -148,7 +133,7 @@ function uploadImage($fileName,$target_dir) {
   $target_file = $target_dir . preg_replace('/\s+/', '_', basename($file_name, "$imageFileType")) . "_" . $id . $imageFileType;
   $target_file = $target_dir . basename($_FILES[$fileName]["name"]);
   $uploadOk = 1;
-  //echo "target file is " . $target_file;
+  
   $imageFileType = "." . strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
   //echo "image file type is " . "$imageFileType";
   //echo "file name " . $fileName;
@@ -157,8 +142,7 @@ function uploadImage($fileName,$target_dir) {
   	$file_name = substr($file_name, 0, 15);
   }
   $target_file = $target_dir . str_replace(' ', '_', basename($file_name, "$imageFileType")) . "_" . $id . $imageFileType; 
-  //$target_file = $target_dir . basename($file_name, "$imageFileType") . "_" . $id . $imageFileType;
-  //echo "target file is ". $target_file;
+  
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
       $check = getimagesize($_FILES[$fileName]["tmp_name"]);
@@ -212,38 +196,35 @@ if(isset($_POST["submit"])){
     $old_path = getcwd();
     chdir('/home/developer/fast-style-transfer/');
     $inputStr = 'sudo -u developer python evaluate.py --checkpoint '. $style . ' --in-path ' . $content . ' --out-path /var/www/html/output 2>&1';
-    //echo $inputStr;
+    
     $resultErr = shell_exec($inputStr);
-    //echo $resultErr;
+    
     chdir($old_path);
-    //echo "<br>";
-    //echo $content;
-    //echo "<br>";
-    $dispPath = str_replace("/var/www/uploads/content/","",$content);
-    //echo $dispPath;
-    $path = "output/" . $dispPath;
+    
+    $fileName = str_replace("/var/www/uploads/content/","",$content);
+    
+    $path = "output/" . $fileName;
+    // insert this styled file path into the db
+    echo $path;
+    echo "<br>";
+    echo $fileName;
+    insertPhotoIntoDB($path,$fileName);
     $imageData  = base64_encode(file_get_contents($path));
     $src = 'data: '.mime_content_type($path).';base64,'.$imageData;
     watermarkImage($src);
     $processTime = (microtime(true) - $startTime);
-    //echo $processTime;
+    
     $sql = "UPDATE photos SET processing_time = $processTime where photo_id = (SELECT photo_id from photos ORDER BY photo_id DESC LIMIT 1)";
-    //echo $sql;
+    
     $result = pg_query($conn, $sql);
     if ($result) {
       //echo "processing time updated";
     } else {
       //echo pg_last_error($conn);
     }
-    /*echo '<img src = "' . $src . '">';
-    echo '<img src = "/output/' . $dispPath . '">';
-    echo "<br>";
-    echo $src;
-    echo "<br>";
-    header('Location: view.php');
-    */
+    
     echo '<script>window.location.href="view.php";</script>';
-    //echo "<button data-cp-url=\"http://". $_SERVER['HTTP_HOST'] . "/" . $path ."\">Buy Now</button>";
+   
   }
 }
 ?>
