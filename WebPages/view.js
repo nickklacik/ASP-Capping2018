@@ -3,6 +3,7 @@ var photo_id;
 // Updates the src of the main image tag
 function updateImage(newSrc, id) {
   document.getElementById("image").src = newSrc;
+  document.getElementById("printBtn").setAttribute("data-cp-url","https://"+window.location.hostname +"/"+ newSrc);
   photo_id = id;
 }
 
