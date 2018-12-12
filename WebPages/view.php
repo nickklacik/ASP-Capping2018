@@ -72,16 +72,16 @@ require('session.php');
         ."FROM Photos LEFT JOIN Orders ON photos.photo_id = orders.photo_id WHERE photos.email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC;";
         $result = pg_query($conn, $sql);
         if($row = pg_fetch_row($result)){
-          $purchased = is_null($row[3]);
-          $src = $purchased ? $row[0] : $row[2];
+          $purchased = is_null($row[3]) ? 0 : 1;
+          $src = is_null($row[3]) ? $row[0] : $row[2];
           $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
-          echo "<script> updateImage('$src', $id) </script>";
+          echo "<script> updateImage('$src', $id, $purchased) </script>";
 	        echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id, $purchased)\"></div>";
         }
         while($row = pg_fetch_row($result)){
-          $purchased = is_null($row[3]);
-          $src = $purchased ? $row[0] : $row[2];
+          $purchased = is_null($row[3]) ? 0 : 1;
+          $src = is_null($row[3]) ? $row[0] : $row[2];
           $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
           echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id, $purchased)\"></div>"; 
