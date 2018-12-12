@@ -20,8 +20,22 @@ if(empty($_SESSION['login_user'])) {
     <br><br>
     <form action="uploadImages.php" method="post" enctype="multipart/form-data">
       <div style="float: left; font-family: Tahoma; width: 47%; background-color: LightGray; height: 350px; text-align: center; margin-left: 15px; padding-top: 5px; border: 2px solid black; margin-bottom: 15px; "> Select image to upload:
-	<input type="file" name="OriginalUpload" id="OriginalUpload">
-	<p> Example:  </p> <img src="Example.jpg">
+	<input type="file" name="OriginalUpload" id="OriginalUpload" onchange="readURL(this);">
+  <br><br><br><br><br>
+        <!-- Image uploaded is displayed inside the div -->
+        <img id="UserUpload" src="#" alt="Preview your image here!" align="center" width="120px" height="auto"/>
+        <script>
+          // Reads user input on change and changes image source to the image uploaded
+          function readURL(input) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  document.getElementById('UserUpload').src=e.target.result;
+              }
+              reader.readAsDataURL(input.files[0]);
+            }
+          }
+        </script>
       </div>
       <div style="float: right; font-family: Tahoma; width: 47%; background-color: LightGray; height: 350px; text-align: center; margin-right: 15px; padding-top: 5px; border: 2px solid black; margin-bottom: 15px;">
         Select style to apply:
