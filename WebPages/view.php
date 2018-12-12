@@ -25,7 +25,6 @@ require('session.php');
     <script src="view.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="pablo.css">
     <link rel="icon" href="logo.png">
-    <meta property="og:image"  content="pablo.jpg" />
   </head>
   <body id=bkg2>
     <?php
@@ -62,11 +61,6 @@ require('session.php');
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));</script>
         <br><br><br>
-         <!-- Your share button code -->
-         <div class="fb-share-button" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-    </div>
-    <br><br><br>
-    <div style="width: 100%; border: 2px solid black; overflow: auto">
       <?php
         $sql = "SELECT photos.preview_path, photos.Photo_id, photos.file_path, orders.order_id, photos.Upload_Date "
         ."FROM Photos LEFT JOIN Orders ON photos.photo_id = orders.photo_id WHERE photos.email='".$_SESSION['login_user']."' ORDER BY Upload_Date DESC;";
@@ -77,6 +71,11 @@ require('session.php');
           $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
           echo "<script> updateImage('$src', $id, $purchased) </script>";
+          /* Facebook Share button, grabs the source of the image being displayed */
+          echo '<div class="fb-share-button" data-href="'.$src.'" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>';
+          echo '</div>';
+          echo '<br><br><br>';
+          echo '<div style="width: 99%; border: 2px solid black; overflow: auto">';
 	  echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id, $purchased)\"></div>";
         }
         while($row = pg_fetch_row($result)){
@@ -87,6 +86,7 @@ require('session.php');
           echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id, $purchased)\"></div>"; 
         }
       ?>
+      
     </div>
   </body>
 </html>
