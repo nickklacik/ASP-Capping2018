@@ -54,11 +54,11 @@ function insertPhotoIntoDB($target_file, $fileName) {
     if($result) {
       //echo "successfully insert into database";
     } else {
-      echo "failed to insert into database<br>";
-      echo pg_last_error($conn);
+        echo "failed to insert into database<br>";
+        echo pg_last_error($conn);
     }
   } else {
-    echo "Image not added to database";
+      echo "Image not added to database";
   }
 }
 function watermarkImage($srcFilePath) {
@@ -110,18 +110,16 @@ function watermarkImage($srcFilePath) {
     if ($result) {
       //echo "photo table updated";
     } else {
-      echo pg_last_error($conn);
+        echo pg_last_error($conn);
     }
   } else {
       echo pg_last_error($conn);
   }
-  //var_dump($watermarkedjpg);
-  //imagedestroy($im);
+  
 }
 function contentImage($fileName){
   $target_dir = "../uploads/content/";
   $target_file =  uploadImage($fileName,$target_dir);
-  //insertPhotoIntoDB($target_file, $fileName);
   return $target_file;
 }
 function styleImage($fileName){
@@ -135,8 +133,7 @@ function uploadImage($fileName,$target_dir) {
   $uploadOk = 1;
   
   $imageFileType = "." . strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  //echo "image file type is " . "$imageFileType";
-  //echo "file name " . $fileName;
+  
   $file_name = basename($_FILES[$fileName]["name"]);
   if (strlen($file_name) > 30) {
   	$file_name = substr($file_name, 0, 15);
@@ -145,40 +142,40 @@ function uploadImage($fileName,$target_dir) {
   
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
-      $check = getimagesize($_FILES[$fileName]["tmp_name"]);
-      if($check !== false) {
-          echo "File is an image - " . $check["mime"] . ".";
-          $uploadOk = 1;
-      } else {
-          echo "File is not an image.";
-          $uploadOk = 0;
-      }
+    $check = getimagesize($_FILES[$fileName]["tmp_name"]);
+    if($check !== false) {
+      echo "File is an image - " . $check["mime"] . ".";
+      $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
   }
   // Check if file already exists
   if (file_exists($target_file)) {
-      echo "Sorry, file already exists.";
-      $uploadOk = 0;
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
   }
   // Check file size
   if ($_FILES[$fileName]["size"] > 800000) {
-      echo "Sorry, your file is too large.";
-      $uploadOk = 0;
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
   }
   // Allow certain file formats
   if($imageFileType != ".jpg" && $imageFileType != ".png" && $imageFileType != ".jpeg"
   && $imageFileType != ".gif" ) {
-      echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-      $uploadOk = 0;
+    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $uploadOk = 0;
   }
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
-      echo "Sorry, your file was not uploaded.";
-      return false;
+    echo "Sorry, your file was not uploaded.";
+    return false;
   // if everything is ok, try to upload file
   } else {
       if (move_uploaded_file($_FILES[$fileName]["tmp_name"], $target_file)) {
-          echo "The file ". basename( $_FILES[$fileName]["name"]). " has been uploaded.";
-          return $target_file;
+        echo "The file ". basename( $_FILES[$fileName]["name"]). " has been uploaded.";
+        return $target_file;
       } else {
           echo "Sorry, there was an error uploading your file. Error #".$_FILES[$fileName]["error"];
           return false;
@@ -188,7 +185,6 @@ function uploadImage($fileName,$target_dir) {
 echo "We are currently processing your image! <br>";
 $startTime = microtime(true);
 $content = "/var/www" . ltrim(contentImage("OriginalUpload"),"..");
-//echo "<br><br>";
 
 if(isset($_POST["submit"])){
   $style = "style/" . $_POST['StyleUpload'];
@@ -204,7 +200,7 @@ if(isset($_POST["submit"])){
     $fileName = str_replace("/var/www/uploads/content/","",$content);
     
     $path = "output/" . $fileName;
-    // insert this styled file path into the db
+    // Insert this styled file path into the database
     echo $path;
     echo "<br>";
     echo $fileName;
@@ -217,11 +213,6 @@ if(isset($_POST["submit"])){
     $sql = "UPDATE photos SET processing_time = $processTime where photo_id = (SELECT photo_id from photos ORDER BY photo_id DESC LIMIT 1)";
     
     $result = pg_query($conn, $sql);
-    if ($result) {
-      //echo "processing time updated";
-    } else {
-      //echo pg_last_error($conn);
-    }
     
     echo '<script>window.location.href="view.php";</script>';
    

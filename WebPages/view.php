@@ -77,7 +77,7 @@ require('session.php');
           $id = $row[1];
           if(stripos($src, "..") === 0) $src = "image.php?img=" . $src;
           echo "<script> updateImage('$src', $id, $purchased) </script>";
-	        echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id, $purchased)\"></div>";
+	  echo "<div class=\"imgContainer\"><img src=\"$src\" class=\"containedImg\" onclick=\"updateImage('$src', $id, $purchased)\"></div>";
         }
         while($row = pg_fetch_row($result)){
           $purchased = is_null($row[3]) ? 0 : 1;

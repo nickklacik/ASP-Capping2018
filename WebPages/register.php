@@ -5,38 +5,38 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   if ($_POST['pass'] != $_POST['confpass']) {
     $_SESSION['register_error'] = "Sorry, passwords do not match.";	  
   } else {
-   $pass = $_POST['pass'];
-    // check that password meets requirements
-   preg_match('@[A-Z]@', $pass, $uppercase);
-   preg_match('@[a-z]@', $pass, $lowercase);
-   preg_match('@[0-9]@', $pass, $number);
-   preg_match('/[?:.*!@#$%^&*()\-_=+{};:,<.>]/', $pass, $special);
-   if(empty($uppercase) || empty($lowercase) || empty($number) || empty($special) || strlen($pass) < 8) {
-     $_SESSION['register_error'] = "Password does not meet requirements";
-   } else { 	  
-    $sql = "SELECT email FROM Users where email = '".$_POST['email']."'";
-    $result = pg_query($conn, $sql);
-    if(pg_num_rows($result) ==  0) {
-      // email doesn't exist so add it
-      $email = $_POST['email'];
-      $first = $_POST['first'];
-      $last = $_POST['last'];
-      $passwordHash = password_hash($pass, PASSWORD_DEFAULT);
+      $pass = $_POST['pass'];
+      // check that password meets requirements
+      preg_match('@[A-Z]@', $pass, $uppercase);
+      preg_match('@[a-z]@', $pass, $lowercase);
+      preg_match('@[0-9]@', $pass, $number);
+      preg_match('/[?:.*!@#$%^&*()\-_=+{};:,<.>]/', $pass, $special);
+      if(empty($uppercase) || empty($lowercase) || empty($number) || empty($special) || strlen($pass) < 8) {
+        $_SESSION['register_error'] = "Password does not meet requirements";
+      } else { 	  
+        $sql = "SELECT email FROM Users where email = '".$_POST['email']."'";
+        $result = pg_query($conn, $sql);
+        if(pg_num_rows($result) ==  0) {
+        // email doesn't exist so add it
+          $email = $_POST['email'];
+          $first = $_POST['first'];
+          $last = $_POST['last'];
+          $passwordHash = password_hash($pass, PASSWORD_DEFAULT);
 
-      $sql = "INSERT INTO Users (email, first_name, last_name, is_admin, password) VALUES ('".$email."', '".$first."', '".$last."', FALSE, '".$passwordHash."')";
-      echo $sql;
-      $result = pg_query($conn, $sql);
-      if($result == FALSE) {
-        echo "Error: " . pg_result_error(pg_get_result($conn));
-      } else {
-          header('Location: login.php');
-	}
-     } else {
-       // email does exist 
-       $_SESSION['register_error'] = "Sorry, that email is already used.";
+          $sql = "INSERT INTO Users (email, first_name, last_name, is_admin, password) VALUES ('".$email."', '".$first."', '".$last."', FALSE, '".$passwordHash."')";
+          echo $sql;
+          $result = pg_query($conn, $sql);
+          if($result == FALSE) {
+            echo "Error: " . pg_result_error(pg_get_result($conn));
+          } else {
+              header('Location: login.php');
+	  }
+        } else {
+        // email does exist 
+           $_SESSION['register_error'] = "Sorry, that email is already used.";
+       }
      }
-   }
- }
+  }
 } 
 ?>
 <!doctype html>
@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" href="pablo.css">
-    <link rel="icon" href="logo.png">
   </head>
   <body id=bkg1>
     <?php

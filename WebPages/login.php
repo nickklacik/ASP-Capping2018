@@ -37,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" href="pablo.css">
-    <link rel="icon" href="logo.png">
   </head>
   <body id="bkg1" >
     <?php
